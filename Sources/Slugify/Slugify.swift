@@ -1,6 +1,7 @@
 public struct Slugify {
-    public private(set) var text = "Hello, World!"
+    public init() {}
 
-    public init() {
+    public static func slugify(_ string: String) -> String {
+        string
     }
 }
