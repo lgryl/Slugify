@@ -42,6 +42,10 @@ final class SlugifyTests: XCTestCase {
         assert(slugifying: "a   b", resultsIn: "a-b")
     }
 
+    func test_digits_dontChange() {
+        assert(slugifying: "1234567890", resultsIn: "1234567890")
+    }
+
     func test_leadingHyphen_isNotRemoved() {
         assert(slugifying: "-ab", resultsIn: "-ab")
     }
@@ -63,7 +67,7 @@ final class SlugifyTests: XCTestCase {
     }
 
     func test_hyphenWithSpaces_getReducedToHyphen() {
-        assert(slugifying: "a - b", resultsIn: "a-b")
+        assert(slugifying: "a - -- b", resultsIn: "a-b")
     }
 
     func test_leadingHyphenWithSpaces_getReducedToHyphen() {
@@ -108,6 +112,34 @@ final class SlugifyTests: XCTestCase {
 
     func test_givenEmoji_returnsEmptyString() {
         assert(slugifying: "😀", resultsIn: "")
+    }
+
+    func test_stringWithInvalidCharacters_invalidCharactersAreRemoved() {
+        assert(slugifying: "£§!@#$%^&*()_=+[]{};:'\"\\<>,./?", resultsIn: "")
+    }
+
+    func test_leadingInvalidCharacters_areRemoved() {
+        assert(slugifying: "?a", resultsIn: "a")
+    }
+
+    func test_trailingInvalidCharacters_areRemoved() {
+        assert(slugifying: "a?", resultsIn: "a")
+    }
+
+    func test_invalidCharactersInTheMiddle_areRemoved() {
+        assert(slugifying: "a??b", resultsIn: "ab")
+    }
+
+    func test_leadingInvalidCharactersWithSpaces_areRemoved() {
+        assert(slugifying: " ? ?a", resultsIn: "a")
+    }
+
+    func test_trailingInvalidCharactersWithSpaces_areRemoved() {
+        assert(slugifying: "a? ?", resultsIn: "a")
+    }
+
+    func test_invalidCharactersInTheMiddleWithSpaces_areRemoved() {
+        assert(slugifying: "a ?  ?b", resultsIn: "a-b")
     }
 
     private func assert(

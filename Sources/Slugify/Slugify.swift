@@ -8,7 +8,7 @@ public struct Slugify {
             .lowercased()
             .removingDiacritics()
             .removingCharacters()
-            .trimming()
+            .trimmed()
             .reducingWhitespaces()
             .hyphenazingSpaces()
             .reducingHyphens()
@@ -16,7 +16,7 @@ public struct Slugify {
 }
 
 private extension StringProtocol {
-    func trimming() -> String {
+    func trimmed() -> String {
         trimmingCharacters(in: .whitespacesAndNewlines)
     }
     func reducingWhitespaces() -> String {
