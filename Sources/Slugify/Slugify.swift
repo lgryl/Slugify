@@ -1,9 +1,9 @@
 import Foundation
 
-public struct Slugify {
-    public init() {}
+private struct Slugify {
+    private init() {}
 
-    public static func slugify(_ string: String) -> String {
+    internal static func slugify(_ string: String) -> String {
         string
             .lowercased()
             .removingDiacritics()
@@ -15,7 +15,13 @@ public struct Slugify {
     }
 }
 
-private extension StringProtocol {
+public extension String {
+    var slug: String {
+        Slugify.slugify(self)
+    }
+}
+
+private extension String {
     func trimmed() -> String {
         trimmingCharacters(in: .whitespacesAndNewlines)
     }

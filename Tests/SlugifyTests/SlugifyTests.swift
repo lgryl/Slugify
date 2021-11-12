@@ -1,5 +1,5 @@
 import XCTest
-@testable import Slugify
+import Slugify
 
 final class SlugifyTests: XCTestCase {
     func test_givenEmptyString_returnsEmptyString() {
@@ -149,7 +149,7 @@ final class SlugifyTests: XCTestCase {
         file: StaticString = #filePath,
         line: UInt = #line
     ) {
-        let output = Slugify.slugify(input)
+        let output = input.slug
         XCTAssertEqual(output, expectedOutput)
     }
 }
