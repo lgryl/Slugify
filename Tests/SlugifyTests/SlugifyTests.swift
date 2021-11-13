@@ -142,6 +142,27 @@ final class SlugifyTests: XCTestCase {
         assert(slugifying: "a ?  ?b", resultsIn: "a-b")
     }
 
+    func test_englishSentences_getSlugifiedCorrectly() {
+        assert(
+            slugifying: "We know what we are, but know not what we may be.",
+            resultsIn: "we-know-what-we-are-but-know-not-what-we-may-be"
+        )
+    }
+
+    func test_polishSentences_getSlugifiedCorrectly() {
+        assert(
+            slugifying: "Zażółć gęślą jaźń",
+            resultsIn: "zazolc-gesla-jazn"
+        )
+    }
+
+    func test_frenchSentences_getSlugifiedCorrectly() {
+        assert(
+            slugifying: "À vaillant coeur rien d’impossible",
+            resultsIn: "a-vaillant-coeur-rien-dimpossible"
+        )
+    }
+
     private func assert(
         slugifying input: String,
         resultsIn expectedOutput: String,
